@@ -1,0 +1,304 @@
+---
+redirect_from:
+  - /chitterne
+  - /chitterne/
+  - /nailsea
+  - /nailsea/
+---
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="900">
+    <title>rain.boff.in</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <div id="loader-wrapper">
+			<div id="loader">
+        <p onclick="redirect('chitterne');" title="Get the rainfall in Chitterne">Chitterne</p>
+				<svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" xml:space="preserve">
+		      <defs>
+            <filter id="blur">
+              <feoffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+              <fecolormatrix result="matrixOut" in="offOut" type="matrix"
+              values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" />
+              <fegaussianblur result="blurOut" in="matrixOut" stddeviation="4" />
+              <feblend in="SourceGraphic" in2="blurOut" mode="normal" />
+            </filter>
+		        <clippath id="drop">
+              <path transform="scale(0.75), translate(32,0)" d="M68.2,6.7c0,0-62.4,70.9-62.4,124.7c0,32.3,28,58.4,62.4,58.4s62.4-26.2,62.4-58.4C130.7,77.6,68.3,6.7,68.2,6.7z" />
+		        </clippath>
+		      </defs>
+          <!-- draw drop with blur -->
+          <g transform="scale(0.75), translate(32,0)" filter="url(#blur)">
+		        <path class="outline" d="M68.2,6.7c0,0-62.4,70.9-62.4,124.7c0,32.3,28,58.4,62.4,58.4s62.4-26.2,62.4-58.4C130.7,77.6,68.3,6.7,68.2,6.7z" />
+		      </g>
+          <!-- draw drop with white background -->
+          <g transform="scale(0.75), translate(32,0)">
+  		      <path fill="#fff" d="M68.2,6.7c0,0-62.4,70.9-62.4,124.7c0,32.3,28,58.4,62.4,58.4s62.4-26.2,62.4-58.4C130.7,77.6,68.3,6.7,68.2,6.7z" />
+          </g>
+          <!-- draw wave -->
+          <g clip-path="url(#drop)">
+		        <g class="fill">
+		          <path fill="#04ACFF" id="waveShape" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+		        </g>
+		      </g>
+          <!-- draw drop with thick outline -->
+          <g transform="scale(0.75), translate(32,0)">
+		        <path class="outline" d="M68.2,6.7c0,0-62.4,70.9-62.4,124.7c0,32.3,28,58.4,62.4,58.4s62.4-26.2,62.4-58.4C130.7,77.6,68.3,6.7,68.2,6.7z" />
+		      </g>
+		    </svg>
+        <p onclick="redirect('nailsea');" title="Get the rainfall in Nailsea">Nailsea</p>
+			</div>
+			<div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+		</div>
+
+    <div id="container">
+      <img src="images/logo.svg" alt="Rain Boffin" title="Rain Boffin" />
+      <article>
+        <!-- <h1>Summary</h1> -->
+        <h1 id="holder_rained">It last rained <span id="rained">1970-01-01T00:00:00Z</span>.</h1>
+        <p id="last_shower_details"></p>
+        <p id="about">
+          Since <span id="collecting_age"></span> the Environment Agency has been measuring how much rain has fallen in the previous 15 minutes in <span id="location_name"></span> and we have compiled it into some interesting facts for you.
+        </p>
+        <p id="holder_updated">
+          The data was last updated <span id="updated">1970-01-01T00:00:00Z</span>.
+        </p>
+      </article>
+
+      <section id="tabs">
+        <input id="tab_hour" type="radio" name="tabs">
+        <label for="tab_hour" id="label_hour">Hour</label>
+
+        <input id="tab_day" type="radio" name="tabs">
+        <label for="tab_day" id="label_day">Day</label>
+
+        <input id="tab_week" type="radio" name="tabs">
+        <label for="tab_week" id="label_week">Week</label>
+
+        <input id="tab_month" type="radio" name="tabs">
+        <label for="tab_month" id="label_month">Month</label>
+
+        <input id="tab_year" type="radio" name="tabs">
+        <label for="tab_year" id="label_year">Year</label>
+
+        <input id="tab_record" type="radio" name="tabs">
+        <label for="tab_record" id="label_record">All time</label>
+
+        <input id="tab_likely" type="radio" name="tabs">
+        <label for="tab_likely" id="label_likely">Likely</label>
+
+        <section id="tab_content">
+          <article id="likely">
+            <section class="most_popular_hour_summary">
+              <canvas id="likely-hour-graph" width="400" height="130" class="canvas-left"></canvas>
+              <p>
+                It is most likely to rain in the hour from <span id="most_popular_hour"></span>.  <span id="most_popular_hour_amount"></span> has fallen during this
+                hour over the years compared to an average hourly rainfall of <span id="most_popular_hour_average"></span>.
+              </p>
+            </section>
+            <div class="clear"></div>
+
+            <section class="most_popular_dayOfWeek_summary most_popular_week_summary">
+              <canvas id="likely-dayOfWeek-graph" width="200" height="200" class="canvas-left"></canvas>
+              <canvas id="likely-week-graph" width="200" height="200" class="canvas-right"></canvas>
+              <p>
+                It is most likely to rain on a <span id="most_popular_dayOfWeek"></span>.  <span id="most_popular_dayOfWeek_amount"></span> has fallen during this day over the years compared to an average day of the week rainfall of <span id="most_popular_dayOfWeek_average"></span>.
+              </p>
+              <p>
+                It is most likely to rain in week <span id="most_popular_week"></span>.  <span id="most_popular_week_amount"></span> has fallen during this week over the years compared to an average weekly rainfall of <span id="most_popular_week_average"></span>.
+              </p>
+            </section>
+            <div class="clear"></div>
+
+            <section class="most_popular_month_summary most_popular_year_summary">
+              <canvas id="likely-month-graph" width="200" height="200" class="canvas-left"></canvas>
+              <canvas id="likely-year-graph" width="200" height="200" class="canvas-right"></canvas>
+              <p>
+                It is most likely to rain in <span id="most_popular_month"></span>.  <span id="most_popular_month_amount"></span> has fallen during this month over the years compared to an average monthly rainfall of <span id="most_popular_month_average"></span>.
+              </p>
+              <p>
+                The wettest year we have recorded was <span id="most_popular_year"></span> when <span id="most_popular_year_amount"></span> of rain fell compared to a yearly average of <span id="most_popular_year_average"></span>.<span id="most_popular_special"></span>
+              </p>
+            </section>
+            <div class="clear"></div>
+
+            <section class="most_popular_dayOfYear_summary">
+              <p>
+                It is most likely to rain on <span id="most_popular_dayOfYear"></span>. <span id="most_popular_dayOfYear_amount"></span> has fallen during this day over the years compared to an average daily rainfall of <span id="most_popular_dayOfYear_average"></span>.
+              </p>
+            </section>
+            <div height="100px"><canvas id="likely-dayOfYear-graph" width="400" height="100" class="canvas-centre"></canvas></div>
+            <div class="clear"></div>
+          </article>
+
+          <article id="record">
+            <h3>Period range:
+              <span id="record_start"></span>
+            </h3>
+            <section id="holder_record_wet">
+              <div id="record_wet">
+                <p>
+                  A total of <span id="record_amount"></span> of rain fell <span id="record_wet_count"></span> during the period and it rained for a total of <span id="record_wet_time"></span> or <span id="record_wet_percent"></span>% of the time.
+                </p>
+                <p>
+                  <span id="record_heaviest_15"></span> fell in the 15 minutes starting from <span id="record_heaviest_15_time"></span>. The greatest amount of rain in one shower was <span id="record_largest"></span> at <span id="record_largest_time"></span>. The longest shower in the period was from <span id="record_longest_wet_time"></span> and lasted <span id="record_longest_wet"></span>.
+                </p>
+                <p>
+                  It was dry for a total of <span id="record_dry_time"></span> or <span id="record_dry_percent"></span>% of the time in <span id="record_dry_count"></span> during the period.  The longest dry spell started at <span id="record_longest_dry_time"></span> and lasted for <span id="record_longest_dry"></span>.
+                </p>
+                <p id="record_hour">
+                  In total there have been <span id="record_hour_wet"></span> and <span id="record_hour_dry"></span> recorded. The longest spell where it rained at least once every hour is <span id="record_hour_wet_row"></span> from <span id="record_hour_wet_row_time"></span>. The longest dry spell is <span id="record_hour_dry_row"></span> from <span id="record_hour_dry_row_time"></span>. The heaviest amount of rain per hour was at <span id="record_hour_intensity_time"></span> when <span id="record_hour_intensity"></span> per hour fell.
+                </p>
+                <p id="record_day">
+                  In total there have been <span id="record_day_wet"></span> and <span id="record_day_dry"></span> recorded. The longest spell where it rained at least once every day is <span id="record_day_wet_row"></span> from <span id="record_day_wet_row_time"></span>. The longest dry spell is <span id="record_day_dry_row"></span> from <span id="record_day_dry_row_time"></span>.
+                </p>
+              </div>
+            </section>
+          </article>
+
+          <article id="hour">
+            <h3>Period range:
+              <span id="hour_start"></span>
+            </h3>
+            <section id="holder_hour_wet">
+              <div id="hour_wet">
+                <p>
+                  A total of <span id="hour_amount"></span> of rain fell <span id="hour_wet_count"></span> during the period and it rained for a total of <span id="hour_wet_time"></span> or <span id="hour_wet_percent"></span>% of the time.
+                </p>
+                <p>
+                  <span id="hour_heaviest_15"></span> fell in the 15 minutes starting from <span id="hour_heaviest_15_time"></span>. The longest shower in the period was from <span id="hour_longest_wet_time"></span> and lasted <span id="hour_longest_wet"></span>.
+                </p>
+                <p>
+                  It was dry for a total of <span id="hour_dry_time"></span> or <span id="hour_dry_percent"></span>% of the time <span id="hour_dry_count"></span> during the period.  The longest dry spell started at <span id="hour_longest_dry_time"></span> and lasted for <span id="hour_longest_dry"></span>.
+                </p>
+                <p id="hour_hour">
+                  In the last hour there have been <span id="hour_hour_wet"></span> and <span id="hour_hour_dry"></span>. The longest spell where it rained at least once every hour is <span id="hour_hour_wet_row"></span> from <span id="hour_hour_wet_row_time"></span>. The longest dry spell is <span id="hour_hour_dry_row"></span> from
+                  <span id="hour_hour_dry_row_time"></span>. The heaviest amount of rain per hour was at <span id="hour_intensity_time"></span> when <span id="hour_intensity"></span> per hour fell.
+                </p>
+                <p id="hour_day">
+                  In the last hour there have been <span id="hour_day_wet"></span> and <span id="hour_day_dry"></span>. The longest spell where it rained at least once every day is <span id="hour_day_wet_row"></span> from <span id="hour_day_wet_row_time"></span>. The longest dry spell is <span id="day_hour_dry_row"></span> from <span id="day_hour_dry_row_time"></span>.
+                </p>
+              </div>
+            </section>
+          </article>
+
+          <article id="day">
+            <h3>Period range:
+              <span id="day_start"></span>
+            </h3>
+            <section id="holder_day_wet">
+              <div id="day_wet">
+                <p>
+                  A total of <span id="day_amount"></span> of rain fell <span id="day_wet_count"></span> during the period and it rained for a total of <span id="day_wet_time"></span> or <span id="day_wet_percent"></span>% of the time.
+                </p>
+                <p>
+                  <span id="day_heaviest_15"></span> fell in the 15 minutes starting from <span id="day_heaviest_15_time"></span>. The greatest amount of rain in one shower was <span id="day_largest"></span> at <span id="day_largest_time"></span>.  The longest shower in the period was from <span id="day_longest_wet_time"></span> and lasted <span id="day_longest_wet"></span>.
+                </p>
+                <p>
+                  It was dry for a total of <span id="day_dry_time"></span> or <span id="day_dry_percent"></span>% of the time <span id="day_dry_count"></span> during the period.  The longest dry spell started at <span id="day_longest_dry_time"></span> and lasted for <span id="day_longest_dry"></span>.
+                </p>
+                <p id="day_hour">
+                  In the last day there have been <span id="day_hour_wet"></span> and <span id="day_hour_dry"></span>. The longest spell where it rained at least once every hour is <span id="day_hour_wet_row"></span> from <span id="day_hour_wet_row_time"></span>.  The longest dry spell is <span id="day_dry_row"></span> from <span id="day_dry_row_time"></span>. The heaviest amount of rain per hour was at <span id="day_hour_intensity_time"></span> when <span id="day_hour_intensity"></span> per hour fell.
+                </p>
+                <p id="day_day">
+                  In the last day there have been <span id="day_day_wet"></span> and <span id="day_day_dry"></span>.  The longest spell where it rained at least once every day is <span id="day_day_wet_row"></span> from <span id="day_day_wet_row_time"></span>.  The longest dry spell is <span id="day_day_dry_row"></span> from <span id="day_day_dry_row_time"></span>.
+                </p>
+              </div>
+            </section>
+          </article>
+
+          <article id="week">
+            <h3>Period range:
+              <span id="week_start"></span>
+            </h3>
+            <section id="holder_week_wet">
+              <div id="week_wet">
+                <p>
+                  A total of <span id="week_amount"></span> of rain fell <span id="week_wet_count"></span> during the period and it rained for a total of <span id="week_wet_time"></span> or <span id="week_wet_percent"></span>% of the time.
+                </p>
+                <p>
+                  <span id="week_heaviest_15"></span> fell in the 15 minutes starting from <span id="week_heaviest_15_time"></span>. The greatest amount of rain in one shower was <span id="week_largest"></span> at <span id="week_largest_time"></span>. The longest shower in the period was from <span id="week_longest_wet_time"></span> and lasted <span id="week_longest_wet"></span>.
+                </p>
+                <p>
+                  It was dry for a total of <span id="week_dry_time"></span> or <span id="week_dry_percent"></span>% of the time <span id="week_dry_count"></span> during the period.  The longest dry spell started at <span id="week_longest_dry_time"></span> and lasted for <span id="week_longest_dry"></span>.
+                </p>
+                <p id="week_hour">
+                  In the last week there have been <span id="week_hour_wet"></span> and <span id="week_hour_dry"></span>. The longest spell where it rained at least once every hour is <span id="week_hour_wet_row"></span> from <span id="week_hour_wet_row_time"></span>. The longest dry spell is <span id="week_hour_dry_row"></span> from <span id="week_hour_dry_row_time"></span>. The heaviest amount of rain per hour was at <span id="week_hour_intensity_time"></span> when <span id="week_hour_intensity"></span> per hour fell.
+                </p>
+                <p id="week_day">
+                  In the last week there have been <span id="week_day_wet"></span> and <span id="week_day_dry"></span>. The longest spell where it rained at least once every day is <span id="week_day_wet_row"></span> from <span id="week_day_wet_row_time"></span>. The longest dry spell is <span id="week_day_dry_row"></span> from <span id="week_day_dry_row_time"></span>.
+                </p>
+              </div>
+            </section>
+          </article>
+
+          <article id="month">
+            <h3>Period range:
+              <span id="month_start"></span>
+            </h3>
+            <section id="holder_month_wet">
+              <div id="month_wet">
+                <p>
+                  A total of <span id="month_amount"></span> of rain fell <span id="month_wet_count"></span> during the period and it rained for a total of <span id="month_wet_time"></span> or <span id="month_wet_percent"></span>% of the time.
+                </p>
+                <p>
+                  <span id="month_heaviest_15"></span> fell in the 15 minutes starting from <span id="month_heaviest_15_time"></span>. The greatest amount of rain in one shower was <span id="month_largest"></span> at <span id="month_largest_time"></span>. The longest shower in the period was from <span id="month_longest_wet_time"></span> and lasted <span id="month_longest_wet"></span>.
+                </p>
+                <p>
+                  It was dry for a total of <span id="month_dry_time"></span> or <span id="month_dry_percent"></span>% of the time <span id="month_dry_count"></span> during the period.  The longest dry spell started at <span id="month_longest_dry_time"></span> and lasted for <span id="month_longest_dry"></span>.
+                </p>
+                <p id="month_hour">
+                  In the last month there have been <span id="month_hour_wet"></span> and <span id="month_hour_dry"></span>. The longest spell where it rained at least once every hour is <span id="month_hour_wet_row"></span> from <span id="month_hour_wet_row_time"></span>. The longest dry spell is <span id="month_hour_dry_row"></span> from <span id="month_hour_dry_row_time"></span>. The heaviest amount of rain per hour was at <span id="month_hour_intensity_time"></span> when <span id="month_hour_intensity"></span> per hour fell.
+                </p>
+                <p id="month_day">
+                  In the last month there have been <span id="month_day_wet"></span> and <span id="month_day_dry"></span>. The longest spell where it rained at least once every day is <span id="month_day_wet_row"></span> from <span id="month_day_wet_row_time"></span>.  The longest dry spell is <span id="month_day_dry_row"></span> from <span id="month_day_dry_row_time"></span>.
+                </p>
+              </div>
+            </section>
+          </article>
+
+          <article id="year">
+            <h3>Period range:
+              <span id="year_start"></span>
+            </h3>
+            <section id="holder_year_wet">
+              <div id="year_wet">
+                <p>
+                  A total of <span id="year_amount"></span> of rain fell <span id="year_wet_count"></span> during the period and it rained for a total of <span id="year_wet_time"></span> or <span id="year_wet_percent"></span>% of the time.
+                </p>
+                <p>
+                  <span id="year_heaviest_15"></span> fell in the 15 minutes starting from <span id="year_heaviest_15_time"></span>. The greatest amount of rain in one shower was <span id="year_largest"></span> at <span id="year_largest_time"></span>. The longest shower in the period was from <span id="year_longest_wet_time"></span> and lasted <span id="year_longest_wet"></span>.
+                </p>
+                <p>
+                  It was dry for a total of <span id="year_dry_time"></span> or <span id="year_dry_percent"></span>% of the time <span id="year_dry_count"></span> during the period.  The longest dry spell started at <span id="year_longest_dry_time"></span> and lasted for <span id="year_longest_dry"></span>.
+                </p>
+                <p id="year_hour">
+                  In the last year there have been <span id="year_hour_wet"></span> and <span id="year_hour_dry"></span>. The longest spell where it rained at least once every hour is <span id="year_hour_wet_row"></span> from <span id="year_hour_wet_row_time"></span>. The longest dry spell is <span id="year_hour_dry_row"></span> from <span id="year_hour_dry_row_time"></span>. The heaviest amount of rain per hour was at <span id="year_hour_intensity_time"></span> when <span id="year_hour_intensity"></span> per hour fell.
+                </p>
+                <p id="year_day">
+                  In the last year there have been <span id="year_day_wet"></span> and <span id="year_day_dry"></span>. The longest spell where it rained at least once every day is <span id="year_day_wet_row"></span> from <span id="year_day_wet_row_time"></span>. The longest dry spell is <span id="year_day_dry_row"></span> from <span id="year_day_dry_row_time"></span>.
+                </p>
+              </div>
+            </section>
+          </article>
+        </section>
+      </section>
+      <footer>Switch to: <a href="/chitterne" title="Latest rainfall data for Chitterne">Chitterne</a> &bull; <a href="/nailsea" title="Latest rainfall data for Nailsea">Nailsea</a></footer>
+    </div>
+    <div id="chartjs-tooltip">
+      <table></table>
+    </div>
+    <script src="js/humanize-duration.js"></script>
+    <script src="js/chroma.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
