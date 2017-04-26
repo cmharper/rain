@@ -486,7 +486,7 @@ function expected_amount( d, period ) {
       if ( period === "month" ) {
         var lower = moment.utc().add( -1, "month" ).format( "DDD" );
         var upper = moment.utc().format( "DDD" );
-        expected_rainfall_this_period = d.likely[ period ].filter(
+        expected_rainfall_this_period = d.likely.dayOfYear.filter(
           function ( m ) {
             return m.period > lower && m.period <= upper;
           } ).reduce( function ( tot, m ) {
@@ -495,10 +495,10 @@ function expected_amount( d, period ) {
         console.log( "lower:", lower );
         console.log( "upper:", upper );
         console.log( expected_rainfall_this_period );
-        console.log( JSON.stringify( d.likely[ period ].filter(
+        console.log( JSON.stringify( d.likely.dayOfYear.filter(
           function ( m ) {
-            //return m.period > lower && m.period <= upper;
-            return m;
+            return m.period > lower && m.period <= upper;
+            // return m;
           } ) ) );
       } else {
         expected_rainfall_this_period = d.likely[ period ].reduce(
