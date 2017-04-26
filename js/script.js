@@ -492,6 +492,7 @@ function expected_amount( d, period ) {
           } ).reduce( function ( tot, m ) {
           return tot + m.average_per_period;
         }, 0 );
+        alert( expected_rainfall_this_period );
         console.log( expected_rainfall_this_period );
         console.log( d.likely[ period ].map(
           function ( m ) {
