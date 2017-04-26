@@ -497,7 +497,8 @@ function expected_amount( d, period ) {
         console.log( expected_rainfall_this_period );
         console.log( d.likely[ period ].filter(
           function ( m ) {
-            return m.period > lower && m.period <= upper;
+            //return m.period > lower && m.period <= upper;
+            return m;
           } ) );
       } else {
         expected_rainfall_this_period = d.likely[ period ].reduce(
