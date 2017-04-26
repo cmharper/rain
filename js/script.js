@@ -478,16 +478,25 @@ function draw_the_graphs( d ) {
 // a function that calculates the expected amount of rainfall in a given period, it returns how much of the expected amount has fallen as a percentage
 function expected_amount( d, period ) {
   try {
-    var format = period === "month" ? "M" : "YYYY";
+    // var format = period === "month" ? "M" : "YYYY";
     if ( typeof d.likely[ period ] !== "undefined" &&
       typeof d[ period + "_by_all" ] !== "undefined" ) {
-      var this_period = parseInt( moment.utc().format( format ), 10 );
+      // var this_period = parseInt( moment.utc().format( format ), 10 );
       var expected_rainfall_this_period;
       if ( period === "month" ) {
-        expected_rainfall_this_period = d.likely[ period ].filter(
+        var lower = moment.utc().add( -1, "month" ).format( DDD );
+        var upper = moment.utc().format( DDD );
+        expected_rainfall_this_period = d.likely[ period ].map(
           function ( m ) {
-            return m.period === this_period;
-          } )[ 0 ].average_per_period;
+            return m.period > lower && m.period <= upper;
+          } ).reduce( function ( tot, m ) {
+          return tot + m.average_per_period;
+        }, 0 );
+        console.log( expected_rainfall_this_period );
+        console.log( d.likely[ period ].map(
+          function ( m ) {
+            return m.period > lower && m.period <= upper;
+          } ) );
       } else {
         expected_rainfall_this_period = d.likely[ period ].reduce(
           function ( tot, m ) {
