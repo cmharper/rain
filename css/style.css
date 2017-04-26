@@ -110,7 +110,7 @@ canvas {
 }
 
 .canvas-centre {
-  float: center;
+  text-align: center;
 }
 
 .canvas-right {
