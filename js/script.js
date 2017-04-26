@@ -509,6 +509,7 @@ function expected_amount( d, period ) {
       return percentage_of_expected;
     }
   } catch ( e ) {
+    alert( e );
     return null;
   }
 }
