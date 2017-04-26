@@ -492,14 +492,6 @@ function expected_amount( d, period ) {
           } ).reduce( function ( tot, m ) {
           return tot + m.average_per_period;
         }, 0 );
-        console.log( "lower:", lower );
-        console.log( "upper:", upper );
-        console.log( expected_rainfall_this_period );
-        console.log( JSON.stringify( d.likely.dayOfYear.filter(
-          function ( m ) {
-            return m.period > lower && m.period <= upper;
-            // return m;
-          } ) ) );
       } else {
         expected_rainfall_this_period = d.likely[ period ].reduce(
           function ( tot, m ) {
