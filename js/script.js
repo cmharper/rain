@@ -148,7 +148,7 @@ function define_section( d, period ) {
         );
         setElement(
           period + "_" + wd + "_count",
-          onceOrTwice( part[ wd ].number_of_readings, "spells" )
+          onceOrTwice( part[ wd ].number_of_periods, "spells" )
         );
         var units = {
           "units": [ 'w', 'd', 'h', 'm' ]
@@ -193,7 +193,7 @@ function define_section( d, period ) {
           );
         }
           [ "wet", "dry" ].forEach( function ( wd ) {
-          duration = part[ wd ].number_of_readings;
+          duration = part[ wd ].number_of_periods;
           duration_text = " " + wd + " " + sub;
           if ( duration !== 1 ) {
             duration_text = duration_text + "s";
@@ -714,7 +714,7 @@ function processData( data ) {
 
     // location
     setElement( "location_name", LOCATION );
-    document.title = "How much it rained in " + LOCATION;
+    document.title = LOCATION + " - rain.boff.in";
 
     // add the data to the page period by period
     var loop = [ "hour", "day", "week", "month", "year", "record" ];
