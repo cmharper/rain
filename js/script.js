@@ -484,15 +484,14 @@ function expected_amount( d, period ) {
       // var this_period = parseInt( moment.utc().format( format ), 10 );
       var expected_rainfall_this_period;
       if ( period === "month" ) {
-        var lower = moment.utc().add( -1, "month" ).format( DDD );
-        var upper = moment.utc().format( DDD );
+        var lower = moment.utc().add( -1, "month" ).format( "DDD" );
+        var upper = moment.utc().format( "DDD" );
         expected_rainfall_this_period = d.likely[ period ].map(
           function ( m ) {
             return m.period > lower && m.period <= upper;
           } ).reduce( function ( tot, m ) {
           return tot + m.average_per_period;
         }, 0 );
-        alert( expected_rainfall_this_period );
         console.log( expected_rainfall_this_period );
         console.log( d.likely[ period ].map(
           function ( m ) {
@@ -509,7 +508,6 @@ function expected_amount( d, period ) {
       return percentage_of_expected;
     }
   } catch ( e ) {
-    alert( e );
     return null;
   }
 }
